@@ -1,0 +1,13 @@
+UNIDAD 5 CLN - ARCHIVOS PARA EL LABORATORIO GUIADO
+
+1) Descomprimir Proyecto_Python_Base_U5.zip en una carpeta independiente.
+2) Crear entorno virtual y ejecutar: pip install -r requirements.txt
+3) Ejecutar: pytest -v --cov=src --cov-fail-under=80
+4) Abrir pedidos_prueba.csv, clientes_prueba.csv y casos_de_prueba.csv. Comparar escenarios con la lógica en src/domain.py.
+5) Para explorar datos SQL opcionales, abrir pedidos_prueba.sqlite3 con DB Browser for SQLite o ejecutar python cargar_datos_demo.py para regenerarla.
+6) IMPORTANTE: el proyecto base utiliza SQLite EN MEMORIA para sus pruebas de repositorio. La base .sqlite3 y los CSV son datos DIDÁCTICOS adicionales, NO se importan automáticamente ni son necesarios para que pytest funcione.
+7) Para usar los CSV en pruebas automatizadas, los alumnos deben crear pruebas parametrizadas con csv.DictReader. Los datos no se cargan solos.
+8) Caso CP08: el código actual permite confirmar dos veces. Se incluye para aplicar RED-GREEN-REFACTOR, no como prueba que deba pasar desde el principio.
+9) Los datos son ficticios y no corresponden a las 17 empresas del PIA.
+
+ENTREGABLES: pruebas automatizadas, matriz de resultados reales vs esperados, cobertura >=80%, evidencia commit/rollback y pipeline CI.

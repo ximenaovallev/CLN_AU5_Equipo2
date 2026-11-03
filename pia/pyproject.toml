@@ -1,0 +1,21 @@
+[project]
+name = "rutanorte-logistics"
+version = "0.2.0"
+description = "RutaNorte Logistics - código U3 + suite de pruebas y CI de la Unidad 5"
+requires-python = ">=3.11"
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+markers = [
+    "unitaria: dominio aislado, sin infraestructura (base de la pirámide)",
+    "integracion: dominio + Unit of Work / SQLAlchemy / puertos simulados",
+    "flujo: recorrido completo CU-01..CU-05 por la Service Layer (sustituto documentado de E2E)",
+]
+
+[tool.coverage.run]
+source = ["rutanorte"]
+branch = true
+
+[tool.ruff]
+line-length = 120

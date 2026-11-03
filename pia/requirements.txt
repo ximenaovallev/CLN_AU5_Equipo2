@@ -1,0 +1,6 @@
+# Versiones fijadas (U5): con "ruff>=0.6" sin tope, ruff 0.17 activa reglas nuevas (I001, UP017)
+# y el lint del pipeline cambia de resultado sin que cambie el código. Fijar = CI reproducible.
+pytest==9.2.0
+pytest-cov==7.1.0
+SQLAlchemy==2.1.6
+ruff==0.17.3
