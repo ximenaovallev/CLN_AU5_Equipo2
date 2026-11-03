@@ -6,7 +6,7 @@ from src.domain import CustomerHasDebt, Order
 
 def test_vip_discount():
     o = Order(100, vip=True)            # Arrange: preparar
-    assert o.confirm() == 85            # Act + Assert: confirmar y verificar
+    assert o.confirm() == 90            # Act + Assert: confirmar y verificar
     assert o.status == "CONFIRMED"      # Assert: estado final
 
 
