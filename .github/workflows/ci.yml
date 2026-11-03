@@ -1,0 +1,54 @@
+# Pipeline de la Unidad 5 · RutaNorte Logistics
+# Se ejecuta en cada push y pull request. Dos jobs independientes con los mismos pasos del ZIP base:
+#   checkout -> Python 3.11 -> dependencias -> Ruff -> pytest con cobertura >= 80% -> build (compileall)
+# Si cualquier paso falla, el job queda en rojo. Para BLOQUEAR el merge hay que activar branch
+# protection / ruleset en GitHub exigiendo estos dos checks (el YAML por sí solo no bloquea).
+name: CI Business Logic
+on: [push, pull_request]
+
+jobs:
+  laboratorio:
+    name: Laboratorio (pedidos)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: laboratorio
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: ruff check src tests
+      - run: pytest -v --cov=src --cov-report=term-missing --cov-report=html --cov-fail-under=80
+      - run: python -m compileall -q src
+      - name: Publicar reporte HTML de cobertura
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cobertura-laboratorio
+          path: laboratorio/htmlcov
+
+  pia:
+    name: PIA RutaNorte Logistics
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: pia
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - run: pip install -r requirements.txt
+      - run: ruff check src tests
+      - run: pytest -v --cov=rutanorte --cov-report=term-missing --cov-report=html --cov-fail-under=80
+      - name: Matriz de casos PIA (falla si algún caso no pasa)
+        run: python scripts/generar_matriz_pia.py
+      - run: python -m compileall -q src
+      - name: Publicar reporte HTML de cobertura
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: cobertura-pia
+          path: pia/htmlcov
