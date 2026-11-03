@@ -1,0 +1,10 @@
+﻿caso,rol,es_propietario,estado,antiguedad_horas,resultado,prueba
+A01,Propietario,Sí,NEW,1,Permitido,test_matriz_de_autorizacion[A01]
+A02,Propietario,Sí,NEW,24,Denegado (24 h exactas: el límite es < 24 h),test_matriz_de_autorizacion[A02]
+A03,Propietario,Sí,NEW,25,Denegado (vencido),test_matriz_de_autorizacion[A03]
+A04,Tercero (no admin),No,NEW,1,Denegado,test_matriz_de_autorizacion[A04]
+A05,Administrador,No,NEW,72,"Permitido (admin, sin límite de tiempo)",test_matriz_de_autorizacion[A05]
+A06,Propietario,Sí,CONFIRMED,2,Permitido,test_matriz_de_autorizacion[A06]
+A07,Administrador,No,CONFIRMED,2,Permitido,test_matriz_de_autorizacion[A07]
+A08,Propietario,Sí,SHIPPED,1,Denegado,test_matriz_de_autorizacion[A08]
+A09,Administrador,No,SHIPPED,1,Denegado (enviado prevalece incluso para admin),test_matriz_de_autorizacion[A09]

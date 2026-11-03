@@ -1,0 +1,27 @@
+$ python -m pytest tests/test_security.py -v
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.2.0, pluggy-1.7.0 -- ~/CLN_U5_02_RutaNorte_Logistics/.venv/bin/python
+rootdir: ~/CLN_U5_02_RutaNorte_Logistics/laboratorio
+configfile: pyproject.toml
+plugins: cov-7.1.0
+collecting ... collected 17 items
+
+tests/test_security.py::test_owner_within_24h PASSED                     [  5%]
+tests/test_security.py::test_stranger_denied PASSED                      [ 11%]
+tests/test_security.py::test_shipped_denied_even_admin PASSED            [ 17%]
+tests/test_security.py::test_expired_denied PASSED                       [ 23%]
+tests/test_security.py::test_admin_cancela_pedido_new_de_otro_usuario PASSED [ 29%]
+tests/test_security.py::test_propietario_exactamente_a_las_24h_es_rechazado PASSED [ 35%]
+tests/test_security.py::test_propietario_un_segundo_antes_de_24h_es_permitido PASSED [ 41%]
+tests/test_security.py::test_now_por_defecto_usa_reloj_utc PASSED        [ 47%]
+tests/test_security.py::test_matriz_de_autorizacion[A01] PASSED          [ 52%]
+tests/test_security.py::test_matriz_de_autorizacion[A02] PASSED          [ 58%]
+tests/test_security.py::test_matriz_de_autorizacion[A03] PASSED          [ 64%]
+tests/test_security.py::test_matriz_de_autorizacion[A04] PASSED          [ 70%]
+tests/test_security.py::test_matriz_de_autorizacion[A05] PASSED          [ 76%]
+tests/test_security.py::test_matriz_de_autorizacion[A06] PASSED          [ 82%]
+tests/test_security.py::test_matriz_de_autorizacion[A07] PASSED          [ 88%]
+tests/test_security.py::test_matriz_de_autorizacion[A08] PASSED          [ 94%]
+tests/test_security.py::test_matriz_de_autorizacion[A09] PASSED          [100%]
+
+============================== 17 passed in 0.02s ==============================

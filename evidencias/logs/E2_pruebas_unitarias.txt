@@ -1,0 +1,17 @@
+$ python -m pytest tests/test_order.py -v
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.2.0, pluggy-1.7.0 -- ~/CLN_U5_02_RutaNorte_Logistics/.venv/bin/python
+rootdir: ~/CLN_U5_02_RutaNorte_Logistics/laboratorio
+configfile: pyproject.toml
+plugins: cov-7.1.0
+collecting ... collected 7 items
+
+tests/test_order.py::test_vip_discount PASSED                            [ 14%]
+tests/test_order.py::test_regular_no_discount PASSED                     [ 28%]
+tests/test_order.py::test_customer_debt PASSED                           [ 42%]
+tests/test_order.py::test_invalid_total[0] PASSED                        [ 57%]
+tests/test_order.py::test_invalid_total[-1] PASSED                       [ 71%]
+tests/test_order.py::test_vip_200_recibe_15_por_ciento_y_cobra_170 PASSED [ 85%]
+tests/test_order.py::test_regular_200_no_recibe_descuento_y_cobra_200 PASSED [100%]
+
+============================== 7 passed in 0.01s ===============================

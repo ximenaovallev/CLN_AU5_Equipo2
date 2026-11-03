@@ -1,0 +1,8 @@
+# Prueba de mutación: se elimina la limpieza de _eventos en SqlAlchemy guardar() y se ejecuta PIA-19
+$ python -m pytest tests/test_u5_persistencia_sqlalchemy.py::test_pia19_recargar_no_duplica_eventos -q
+>       assert eventos == ["CotizacionAceptada", "OrdenDeServicioGenerada", "RecursosAsignados", "ServicioCancelado"]
+E       AssertionError: assert ['CotizacionA...ignados', ...] == ['CotizacionA...cioCancelado']
+tests/test_u5_persistencia_sqlalchemy.py:142: AssertionError
+1 failed in 0.20s
+--- código restaurado ---
+1 passed in 0.20s

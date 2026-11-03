@@ -1,0 +1,3 @@
+﻿entrada,regla,resultado_esperado,resultado_real,prueba,estado
+"total=200, vip=True",VIP recibe 15% de descuento; cobro = total - descuento,"170 (descuento 30, CONFIRMED)","170.0 (descuento 30.0, CONFIRMED)",test_vip_200_recibe_15_por_ciento_y_cobra_170,PASSED
+"total=200, vip=False",Cliente regular sin descuento,"200 (descuento 0, CONFIRMED)","200.0 (descuento 0.0, CONFIRMED)",test_regular_200_no_recibe_descuento_y_cobra_200,PASSED

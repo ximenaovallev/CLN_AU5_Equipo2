@@ -1,0 +1,3 @@
+unitaria    10 passed, 46 deselected in 0.16s
+integracion 13 passed, 43 deselected in 0.22s
+flujo       1 passed, 55 deselected in 0.16s

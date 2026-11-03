@@ -1,0 +1,27 @@
+$ python -m pytest -v   # REFACTOR: misma conducta, suite completa
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.2.0, pluggy-1.7.0 -- ~/CLN_U5_02_RutaNorte_Logistics/.venv/bin/python
+rootdir: ~/CLN_U5_02_RutaNorte_Logistics/laboratorio
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-7.1.0
+collecting ... collected 16 items
+
+tests/test_order.py::test_vip_discount PASSED                            [  6%]
+tests/test_order.py::test_regular_no_discount PASSED                     [ 12%]
+tests/test_order.py::test_customer_debt PASSED                           [ 18%]
+tests/test_order.py::test_invalid_total[0] PASSED                        [ 25%]
+tests/test_order.py::test_invalid_total[-1] PASSED                       [ 31%]
+tests/test_order.py::test_vip_200_recibe_15_por_ciento_y_cobra_170 PASSED [ 37%]
+tests/test_order.py::test_regular_200_no_recibe_descuento_y_cobra_200 PASSED [ 43%]
+tests/test_order.py::test_cannot_confirm_twice PASSED                    [ 50%]
+tests/test_repository.py::test_repository_commit PASSED                  [ 56%]
+tests/test_repository.py::test_repository_rollback PASSED                [ 62%]
+tests/test_security.py::test_owner_within_24h PASSED                     [ 68%]
+tests/test_security.py::test_stranger_denied PASSED                      [ 75%]
+tests/test_security.py::test_shipped_denied_even_admin PASSED            [ 81%]
+tests/test_security.py::test_expired_denied PASSED                       [ 87%]
+tests/test_service.py::test_gateway_approved PASSED                      [ 93%]
+tests/test_service.py::test_gateway_rejected PASSED                      [100%]
+
+============================== 16 passed in 0.19s ==============================

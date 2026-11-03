@@ -1,0 +1,15 @@
+$ python -m pytest tests/test_repository.py -v
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.2.0, pluggy-1.7.0 -- ~/CLN_U5_02_RutaNorte_Logistics/.venv/bin/python
+rootdir: ~/CLN_U5_02_RutaNorte_Logistics/laboratorio
+configfile: pyproject.toml
+plugins: cov-7.1.0
+collecting ... collected 5 items
+
+tests/test_repository.py::test_repository_commit PASSED                  [ 20%]
+tests/test_repository.py::test_repository_rollback PASSED                [ 40%]
+tests/test_repository.py::test_commit_pedido_250_id_2_persiste_id_total_y_estado PASSED [ 60%]
+tests/test_repository.py::test_rollback_no_borra_lo_confirmado_antes PASSED [ 80%]
+tests/test_repository.py::test_id_duplicado_viola_unicidad_y_se_revierte PASSED [100%]
+
+============================== 5 passed in 0.08s ===============================

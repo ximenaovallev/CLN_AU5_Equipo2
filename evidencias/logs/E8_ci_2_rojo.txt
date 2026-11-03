@@ -1,0 +1,36 @@
+commit: 4446159 Paso 8 · ROJO temporal: aserción falsa en test_vip_discount para comprobar que el pipeline falla
+== job: laboratorio (working-directory: laboratorio)
+  $ ruff check src tests
+    All checks passed!
+    ✓ ok
+  $ python -m pytest -q -p no:cacheprovider --cov=src --cov-report=term-missing --cov-report=html --cov-fail-under=80
+    Required test coverage of 80% reached. Total coverage: 100.00%
+    =========================== short test summary info ============================
+    FAILED tests/test_order.py::test_vip_discount - AssertionError: assert 85.0 =...
+    1 failed, 50 passed, 1 xfailed in 0.42s
+    ✗ FALLÓ (exit 1)
+== laboratorio: ❌ ROJO
+== job: pia (working-directory: pia)
+  $ ruff check src tests
+    All checks passed!
+    ✓ ok
+  $ python -m pytest -q -p no:cacheprovider --cov=rutanorte --cov-report=term-missing --cov-report=html --cov-fail-under=80
+    TOTAL                                               801      1     50      1    99%
+    Coverage HTML written to dir htmlcov
+    Required test coverage of 80% reached. Total coverage: 99.76%
+    56 passed in 1.16s
+    ✓ ok
+  $ python scripts/generar_matriz_pia.py
+    PIA-22  PASA   Límite   ConnectionError propagado; estado ya confirmado=UNIDAD_ASIGNADA (evento perdido: riesgo)
+    PIA-23  PASA   Éxito    Consulta: ENTREGADO, 6 eventos, 0 incidencias; cumplimiento=1.0
+    
+    23 casos · 23 PASA · 0 FALLA -> evidencias/matriz_casos_pia.csv
+    ✓ ok
+  $ python -m compileall -q src
+    ✓ ok
+== pia: ✅ VERDE
+RESULTADO PIPELINE: ❌ failure
+E       AssertionError: assert 85.0 == 90
+E        +  where 85.0 = confirm()
+E        +    where confirm = Order(total=100, vip=True, status='CONFIRMED', discount=15.0).confirm
+1 failed in 0.02s

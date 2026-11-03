@@ -1,0 +1,15 @@
+$ python -m pytest tests/test_order.py::test_cannot_confirm_twice -v
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.2.0, pluggy-1.7.0 -- ~/CLN_U5_02_RutaNorte_Logistics/.venv/bin/python
+rootdir: ~/CLN_U5_02_RutaNorte_Logistics/laboratorio
+configfile: pyproject.toml
+plugins: cov-7.1.0
+collecting ... collected 1 item
+
+tests/test_order.py::test_cannot_confirm_twice PASSED                    [100%]
+
+============================== 1 passed in 0.01s ===============================
+
+$ python -m pytest -q   # suite completa
+................                                                         [100%]
+16 passed in 0.17s

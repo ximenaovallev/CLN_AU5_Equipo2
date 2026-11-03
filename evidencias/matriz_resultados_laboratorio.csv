@@ -1,0 +1,16 @@
+﻿caso_id,pedido_id,entrada,tipo,resultado_esperado_original,resultado_esperado,resultado_real,estado,prueba_automatizada,nota
+CP01,1,"total=120, vip=0, deuda=0, estado=NEW",Éxito,"CONFIRMED, cobro 120.00","CONFIRMED, cobro 120.00","CONFIRMED, cobro 120.00",PASA,test_caso_de_dominio_desde_csv[CP01],
+CP02,2,"total=200, vip=1, deuda=0, estado=NEW",Éxito,"CONFIRMED, cobro 170.00","CONFIRMED, cobro 170.00","CONFIRMED, cobro 170.00",PASA,test_caso_de_dominio_desde_csv[CP02],
+CP03,3,"total=150, vip=0, deuda=500, estado=NEW",Error,CustomerHasDebt,CustomerHasDebt,CustomerHasDebt: outstanding debt,PASA,test_caso_de_dominio_desde_csv[CP03],
+CP04,4,"total=0, vip=0, deuda=0, estado=NEW",Límite,ValueError,ValueError,ValueError: total must be positive,PASA,test_caso_de_dominio_desde_csv[CP04],
+CP05,5,"total=-10, vip=0, deuda=0, estado=NEW",Error,ValueError,ValueError,ValueError: total must be positive,PASA,test_caso_de_dominio_desde_csv[CP05],
+CP06,6,"total=1000, vip=1, deuda=0, estado=NEW",Éxito,"CONFIRMED, cobro 850.00","CONFIRMED, cobro 850.00","CONFIRMED, cobro 850.00",PASA,test_caso_de_dominio_desde_csv[CP06],
+CP07,7,"total=0.01, vip=1, deuda=0, estado=NEW",Límite,"CONFIRMED, cobro 0.01","CONFIRMED, cobro 0.01","CONFIRMED, cobro 0.01",PASA,test_caso_de_dominio_desde_csv[CP07],
+CP08,8,"total=250, vip=0, deuda=0, estado=CONFIRMED",Error (TDD),CONFIRMED (comportamiento actual; ampliar con TDD),"ValueError: already confirmed (expectativa actualizada por TDD, Paso 3)",ValueError: already confirmed,PASA,test_caso_de_dominio_desde_csv[CP08],Caso TDD: no confirmar dos veces
+CP09,9,"total=300, vip=1, deuda=0, estado=NEW",Éxito,"CONFIRMED, cobro 255.00","CONFIRMED, cobro 255.00","CONFIRMED, cobro 255.00",PASA,test_caso_de_dominio_desde_csv[CP09],
+CP10,10,"total=75, vip=0, deuda=0, estado=NEW",Éxito,"CONFIRMED, cobro 75.00","CONFIRMED, cobro 75.00","CONFIRMED, cobro 75.00",PASA,test_caso_de_dominio_desde_csv[CP10],
+CP11,11,"total=500, vip=1, deuda=250, estado=NEW",Error,CustomerHasDebt,CustomerHasDebt,CustomerHasDebt: outstanding debt,PASA,test_caso_de_dominio_desde_csv[CP11],
+CP12,12,"total=99.99, vip=1, deuda=0, estado=NEW",Éxito,"CONFIRMED, cobro 84.99","CONFIRMED, cobro 84.99","CONFIRMED, cobro 84.99",PASA,test_caso_de_dominio_desde_csv[CP12],
+CP13,,pago rechazado,Integración,RuntimeError: payment rejected,RuntimeError: payment rejected,RuntimeError: payment rejected (mock llamado con 120.0),PASA,test_cp13_pago_rechazado_con_mock,Usar mock del gateway
+CP14,,persistencia commit,Integración,Registro visible después de commit,Registro visible después de commit,Registro visible después de commit,PASA,test_cp14_registro_visible_despues_de_commit,Usar SqlOrderRepository
+CP15,,persistencia rollback,Integración,Registro ausente después de rollback,Registro ausente después de rollback,Registro ausente después de rollback,PASA,test_cp15_registro_ausente_despues_de_rollback,Usar SqlOrderRepository

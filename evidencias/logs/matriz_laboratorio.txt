@@ -1,0 +1,17 @@
+CP01  PASA  esperado=CONFIRMED, cobro 120.00                  real=CONFIRMED, cobro 120.00
+CP02  PASA  esperado=CONFIRMED, cobro 170.00                  real=CONFIRMED, cobro 170.00
+CP03  PASA  esperado=CustomerHasDebt                          real=CustomerHasDebt: outstanding debt
+CP04  PASA  esperado=ValueError                               real=ValueError: total must be positive
+CP05  PASA  esperado=ValueError                               real=ValueError: total must be positive
+CP06  PASA  esperado=CONFIRMED, cobro 850.00                  real=CONFIRMED, cobro 850.00
+CP07  PASA  esperado=CONFIRMED, cobro 0.01                    real=CONFIRMED, cobro 0.01
+CP08  PASA  esperado=ValueError: already confirmed (expectati real=ValueError: already confirmed
+CP09  PASA  esperado=CONFIRMED, cobro 255.00                  real=CONFIRMED, cobro 255.00
+CP10  PASA  esperado=CONFIRMED, cobro 75.00                   real=CONFIRMED, cobro 75.00
+CP11  PASA  esperado=CustomerHasDebt                          real=CustomerHasDebt: outstanding debt
+CP12  PASA  esperado=CONFIRMED, cobro 84.99                   real=CONFIRMED, cobro 84.99
+CP13  PASA  esperado=RuntimeError: payment rejected           real=RuntimeError: payment rejected (mock llamado con 120.0)
+CP14  PASA  esperado=Registro visible después de commit       real=Registro visible después de commit
+CP15  PASA  esperado=Registro ausente después de rollback     real=Registro ausente después de rollback
+
+Matriz escrita en evidencias/matriz_resultados_laboratorio.csv

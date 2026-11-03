@@ -1,0 +1,17 @@
+$ python -m pytest tests/test_service.py -v
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.2.0, pluggy-1.7.0 -- ~/CLN_U5_02_RutaNorte_Logistics/.venv/bin/python
+rootdir: ~/CLN_U5_02_RutaNorte_Logistics/laboratorio
+configfile: pyproject.toml
+plugins: cov-7.1.0
+collecting ... collected 7 items
+
+tests/test_service.py::test_gateway_approved PASSED                      [ 14%]
+tests/test_service.py::test_gateway_rejected PASSED                      [ 28%]
+tests/test_service.py::test_payment_approved_example PASSED              [ 42%]
+tests/test_service.py::test_vip_200_rechazado_intenta_cobrar_170_y_lanza_runtimeerror PASSED [ 57%]
+tests/test_service.py::test_timeout_de_la_pasarela_se_propaga_sin_reintentar PASSED [ 71%]
+tests/test_service.py::test_riesgo_documentado_pedido_queda_confirmado_aunque_el_pago_falle PASSED [ 85%]
+tests/test_service.py::test_propuesta_pedido_no_debe_quedar_confirmado_si_el_pago_falla XFAIL [100%]
+
+========================= 6 passed, 1 xfailed in 0.04s =========================

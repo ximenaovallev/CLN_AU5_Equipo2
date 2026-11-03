@@ -1,0 +1,98 @@
+$ python -m ruff check src tests
+All checks passed!
+
+$ python -m pytest -v --cov=rutanorte --cov-report=term-missing --cov-report=html --cov-fail-under=80
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.2.0, pluggy-1.7.0 -- ~/CLN_U5_02_RutaNorte_Logistics/.venv/bin/python
+rootdir: ~/CLN_U5_02_RutaNorte_Logistics/pia
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-7.1.0
+collecting ... collected 56 items
+
+tests/test_casos_de_uso.py::test_cu01_cliente_acepta_la_cotizacion PASSED [  1%]
+tests/test_casos_de_uso.py::test_cu01_cliente_rechaza_y_no_puede_responder_de_nuevo PASSED [  3%]
+tests/test_casos_de_uso.py::test_cu02_orden_se_genera_solo_tras_aceptacion PASSED [  5%]
+tests/test_casos_de_uso.py::test_cu03_asigna_unidad_y_operador_adecuados PASSED [  7%]
+tests/test_casos_de_uso.py::test_cu03_operador_no_disponible_no_cambia_nada PASSED [  8%]
+tests/test_casos_de_uso.py::test_cu03_unidad_sin_capacidad_suficiente_se_rechaza PASSED [ 10%]
+tests/test_casos_de_uso.py::test_cu03_reasignar_conserva_el_historial PASSED [ 12%]
+tests/test_casos_de_uso.py::test_cu03_recurso_inexistente_es_error_de_negocio PASSED [ 14%]
+tests/test_casos_de_uso.py::test_cu04_entrega_completa PASSED            [ 16%]
+tests/test_casos_de_uso.py::test_cu04_destinatario_ausente_registra_incidencia_y_no_entrega PASSED [ 17%]
+tests/test_casos_de_uso.py::test_cu04_no_se_entrega_si_no_ha_llegado_a_destino PASSED [ 19%]
+tests/test_casos_de_uso.py::test_cu04_entrega_sin_identificar_receptor_se_rechaza PASSED [ 21%]
+tests/test_casos_de_uso.py::test_cu05_atencion_al_cliente_consulta_estado_eventos_e_incidencias PASSED [ 23%]
+tests/test_casos_de_uso.py::test_cu05_indicadores_historicos PASSED      [ 25%]
+tests/test_dominio_y_transaccion.py::test_cotizacion_solo_se_modifica_mientras_esta_en_proceso PASSED [ 26%]
+tests/test_dominio_y_transaccion.py::test_la_orden_exige_el_orden_de_los_estados PASSED [ 28%]
+tests/test_dominio_y_transaccion.py::test_toda_incidencia_queda_en_el_historial_sin_cambiar_estado PASSED [ 30%]
+tests/test_dominio_y_transaccion.py::test_unit_of_work_revierte_si_no_se_confirma PASSED [ 32%]
+tests/test_supuestos_pendientes.py::test_s01_limite_propio_de_peso_rechaza_aunque_la_unidad_tenga_capacidad PASSED [ 33%]
+tests/test_supuestos_pendientes.py::test_s01_sin_limite_propio_solo_cuenta_la_capacidad_de_la_unidad PASSED [ 35%]
+tests/test_supuestos_pendientes.py::test_s02_alto_valor_exige_autorizacion_antes_de_asignar PASSED [ 37%]
+tests/test_supuestos_pendientes.py::test_s02_no_se_autoriza_una_carga_que_no_es_de_alto_valor PASSED [ 39%]
+tests/test_supuestos_pendientes.py::test_s03_sin_plazo_las_evidencias_no_caducan PASSED [ 41%]
+tests/test_supuestos_pendientes.py::test_s03_con_plazo_solo_se_conservan_las_vigentes PASSED [ 42%]
+tests/test_supuestos_pendientes.py::test_s04_cancelacion_registra_quien_y_motivo PASSED [ 44%]
+tests/test_supuestos_pendientes.py::test_s04_rol_sin_autoridad_no_cancela PASSED [ 46%]
+tests/test_supuestos_pendientes.py::test_s04_la_autoridad_es_configurable PASSED [ 48%]
+tests/test_supuestos_pendientes.py::test_s04_exige_motivo_y_no_cancela_un_servicio_entregado_ni_ya_cancelado PASSED [ 50%]
+tests/test_supuestos_pendientes.py::test_s05_cumplimiento_es_entregas_a_tiempo_sobre_entregas_realizadas PASSED [ 51%]
+tests/test_supuestos_pendientes.py::test_s05_sin_entregas_el_cumplimiento_no_esta_definido PASSED [ 53%]
+tests/test_u5_flujo_completo.py::test_pia23_flujo_completo_hasta_consulta PASSED [ 55%]
+tests/test_u5_persistencia_sqlalchemy.py::test_pia16_commit_persiste_la_orden PASSED [ 57%]
+tests/test_u5_persistencia_sqlalchemy.py::test_pia17_error_de_negocio_hace_rollback PASSED [ 58%]
+tests/test_u5_persistencia_sqlalchemy.py::test_pia18_mismo_resultado_en_memoria_y_sqlalchemy PASSED [ 60%]
+tests/test_u5_persistencia_sqlalchemy.py::test_pia19_recargar_no_duplica_eventos PASSED [ 62%]
+tests/test_u5_persistencia_sqlalchemy.py::test_sql_recurso_inexistente_es_error_de_negocio_igual_que_en_memoria PASSED [ 64%]
+tests/test_u5_publicador_mock.py::test_pia20_publica_solo_despues_de_confirmar PASSED [ 66%]
+tests/test_u5_publicador_mock.py::test_pia21_error_de_negocio_no_publica PASSED [ 67%]
+tests/test_u5_publicador_mock.py::test_pia22_falla_del_bus_tras_commit_riesgo_documentado PASSED [ 69%]
+tests/test_u5_reglas_pia.py::test_pia01_orden_desde_cotizacion_aceptada PASSED [ 71%]
+tests/test_u5_reglas_pia.py::test_pia02_cotizacion_en_proceso_no_genera_orden PASSED [ 73%]
+tests/test_u5_reglas_pia.py::test_pia03_cotizacion_rechazada_es_terminal PASSED [ 75%]
+tests/test_u5_reglas_pia.py::test_pia04_asignacion_con_recursos_adecuados PASSED [ 76%]
+tests/test_u5_reglas_pia.py::test_pia05_operador_no_disponible PASSED    [ 78%]
+tests/test_u5_reglas_pia.py::test_pia06_carga_igual_a_capacidad_se_permite PASSED [ 80%]
+tests/test_u5_reglas_pia.py::test_pia07_carga_excede_capacidad_por_10_gramos PASSED [ 82%]
+tests/test_u5_reglas_pia.py::test_pia08_tope_de_volumen_s01 PASSED       [ 83%]
+tests/test_u5_reglas_pia.py::test_pia09_entrega_completa PASSED          [ 85%]
+tests/test_u5_reglas_pia.py::test_pia10_entrega_antes_de_llegar_se_rechaza PASSED [ 87%]
+tests/test_u5_reglas_pia.py::test_pia11_entrega_sin_receptor_se_rechaza PASSED [ 89%]
+tests/test_u5_reglas_pia.py::test_pia12_no_hay_incidencias_despues_de_entregar PASSED [ 91%]
+tests/test_u5_reglas_pia.py::test_pia13_operaciones_cancela_con_motivo PASSED [ 92%]
+tests/test_u5_reglas_pia.py::test_pia14_rol_sin_autoridad_no_cancela PASSED [ 94%]
+tests/test_u5_reglas_pia.py::test_pia15_ni_operaciones_cancela_un_servicio_entregado PASSED [ 96%]
+tests/test_u5_trazabilidad.py::test_cada_caso_de_la_matriz_tiene_una_prueba_ejecutable PASSED [ 98%]
+tests/test_u5_trazabilidad.py::test_la_matriz_cumple_el_minimo_de_la_guia PASSED [100%]
+
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.11.15-final-0 _______________
+
+Name                                              Stmts   Miss Branch BrPart  Cover   Missing
+---------------------------------------------------------------------------------------------
+src/rutanorte/__init__.py                             0      0      0      0   100%
+src/rutanorte/aplicacion/__init__.py                  0      0      0      0   100%
+src/rutanorte/aplicacion/comandos.py                 47      0      0      0   100%
+src/rutanorte/aplicacion/dto.py                      30      0      0      0   100%
+src/rutanorte/aplicacion/handlers.py                119      0      6      0   100%
+src/rutanorte/aplicacion/puertos.py                  13      0      0      0   100%
+src/rutanorte/composicion.py                         26      0      0      0   100%
+src/rutanorte/dominio/__init__.py                     0      0      0      0   100%
+src/rutanorte/dominio/comunes.py                     17      0      0      0   100%
+src/rutanorte/dominio/cotizacion.py                  40      0      2      0   100%
+src/rutanorte/dominio/eventos.py                     33      0      0      0   100%
+src/rutanorte/dominio/orden_de_servicio.py          174      1     18      0    99%   154
+src/rutanorte/dominio/recursos.py                    16      0      0      0   100%
+src/rutanorte/dominio/repositorios.py                 9      0      0      0   100%
+src/rutanorte/dominio/servicios.py                   34      0     10      0   100%
+src/rutanorte/dominio/valores.py                     67      0      0      0   100%
+src/rutanorte/infraestructura/__init__.py             0      0      0      0   100%
+src/rutanorte/infraestructura/en_memoria.py          95      0      6      1    99%   115->exit
+src/rutanorte/infraestructura/sqlalchemy_uow.py      81      0      8      0   100%
+---------------------------------------------------------------------------------------------
+TOTAL                                               801      1     50      1    99%
+Coverage HTML written to dir htmlcov
+Required test coverage of 80% reached. Total coverage: 99.76%
+============================== 56 passed in 1.03s ==============================

@@ -1,0 +1,80 @@
+$ python -m ruff check src tests
+All checks passed!
+
+$ python -m pytest -v --cov=src --cov-report=term-missing --cov-report=html --cov-fail-under=80
+============================= test session starts ==============================
+platform linux -- Python 3.11.15, pytest-9.2.0, pluggy-1.7.0 -- ~/CLN_U5_02_RutaNorte_Logistics/.venv/bin/python
+rootdir: ~/CLN_U5_02_RutaNorte_Logistics/laboratorio
+configfile: pyproject.toml
+testpaths: tests
+plugins: cov-7.1.0
+collecting ... collected 52 items
+
+tests/test_casos_csv.py::test_caso_de_dominio_desde_csv[CP01] PASSED     [  1%]
+tests/test_casos_csv.py::test_caso_de_dominio_desde_csv[CP02] PASSED     [  3%]
+tests/test_casos_csv.py::test_caso_de_dominio_desde_csv[CP03] PASSED     [  5%]
+tests/test_casos_csv.py::test_caso_de_dominio_desde_csv[CP04] PASSED     [  7%]
+tests/test_casos_csv.py::test_caso_de_dominio_desde_csv[CP05] PASSED     [  9%]
+tests/test_casos_csv.py::test_caso_de_dominio_desde_csv[CP06] PASSED     [ 11%]
+tests/test_casos_csv.py::test_caso_de_dominio_desde_csv[CP07] PASSED     [ 13%]
+tests/test_casos_csv.py::test_caso_de_dominio_desde_csv[CP08] PASSED     [ 15%]
+tests/test_casos_csv.py::test_caso_de_dominio_desde_csv[CP09] PASSED     [ 17%]
+tests/test_casos_csv.py::test_caso_de_dominio_desde_csv[CP10] PASSED     [ 19%]
+tests/test_casos_csv.py::test_caso_de_dominio_desde_csv[CP11] PASSED     [ 21%]
+tests/test_casos_csv.py::test_caso_de_dominio_desde_csv[CP12] PASSED     [ 23%]
+tests/test_casos_csv.py::test_cp13_pago_rechazado_con_mock PASSED        [ 25%]
+tests/test_casos_csv.py::test_cp14_registro_visible_despues_de_commit PASSED [ 26%]
+tests/test_casos_csv.py::test_cp15_registro_ausente_despues_de_rollback PASSED [ 28%]
+tests/test_order.py::test_vip_discount PASSED                            [ 30%]
+tests/test_order.py::test_regular_no_discount PASSED                     [ 32%]
+tests/test_order.py::test_customer_debt PASSED                           [ 34%]
+tests/test_order.py::test_invalid_total[0] PASSED                        [ 36%]
+tests/test_order.py::test_invalid_total[-1] PASSED                       [ 38%]
+tests/test_order.py::test_vip_200_recibe_15_por_ciento_y_cobra_170 PASSED [ 40%]
+tests/test_order.py::test_regular_200_no_recibe_descuento_y_cobra_200 PASSED [ 42%]
+tests/test_order.py::test_cannot_confirm_twice PASSED                    [ 44%]
+tests/test_repository.py::test_repository_commit PASSED                  [ 46%]
+tests/test_repository.py::test_repository_rollback PASSED                [ 48%]
+tests/test_repository.py::test_commit_pedido_250_id_2_persiste_id_total_y_estado PASSED [ 50%]
+tests/test_repository.py::test_rollback_no_borra_lo_confirmado_antes PASSED [ 51%]
+tests/test_repository.py::test_id_duplicado_viola_unicidad_y_se_revierte PASSED [ 53%]
+tests/test_security.py::test_owner_within_24h PASSED                     [ 55%]
+tests/test_security.py::test_stranger_denied PASSED                      [ 57%]
+tests/test_security.py::test_shipped_denied_even_admin PASSED            [ 59%]
+tests/test_security.py::test_expired_denied PASSED                       [ 61%]
+tests/test_security.py::test_admin_cancela_pedido_new_de_otro_usuario PASSED [ 63%]
+tests/test_security.py::test_propietario_exactamente_a_las_24h_es_rechazado PASSED [ 65%]
+tests/test_security.py::test_propietario_un_segundo_antes_de_24h_es_permitido PASSED [ 67%]
+tests/test_security.py::test_now_por_defecto_usa_reloj_utc PASSED        [ 69%]
+tests/test_security.py::test_matriz_de_autorizacion[A01] PASSED          [ 71%]
+tests/test_security.py::test_matriz_de_autorizacion[A02] PASSED          [ 73%]
+tests/test_security.py::test_matriz_de_autorizacion[A03] PASSED          [ 75%]
+tests/test_security.py::test_matriz_de_autorizacion[A04] PASSED          [ 76%]
+tests/test_security.py::test_matriz_de_autorizacion[A05] PASSED          [ 78%]
+tests/test_security.py::test_matriz_de_autorizacion[A06] PASSED          [ 80%]
+tests/test_security.py::test_matriz_de_autorizacion[A07] PASSED          [ 82%]
+tests/test_security.py::test_matriz_de_autorizacion[A08] PASSED          [ 84%]
+tests/test_security.py::test_matriz_de_autorizacion[A09] PASSED          [ 86%]
+tests/test_service.py::test_gateway_approved PASSED                      [ 88%]
+tests/test_service.py::test_gateway_rejected PASSED                      [ 90%]
+tests/test_service.py::test_payment_approved_example PASSED              [ 92%]
+tests/test_service.py::test_vip_200_rechazado_intenta_cobrar_170_y_lanza_runtimeerror PASSED [ 94%]
+tests/test_service.py::test_timeout_de_la_pasarela_se_propaga_sin_reintentar PASSED [ 96%]
+tests/test_service.py::test_riesgo_documentado_pedido_queda_confirmado_aunque_el_pago_falle PASSED [ 98%]
+tests/test_service.py::test_propuesta_pedido_no_debe_quedar_confirmado_si_el_pago_falla XFAIL [100%]
+
+================================ tests coverage ================================
+_______________ coverage: platform linux, python 3.11.15-final-0 _______________
+
+Name                 Stmts   Miss  Cover   Missing
+--------------------------------------------------
+src/__init__.py          0      0   100%
+src/application.py       8      0   100%
+src/domain.py           23      0   100%
+src/repository.py       18      0   100%
+src/security.py          8      0   100%
+--------------------------------------------------
+TOTAL                   57      0   100%
+Coverage HTML written to dir htmlcov
+Required test coverage of 80% reached. Total coverage: 100.00%
+======================== 51 passed, 1 xfailed in 0.36s =========================
