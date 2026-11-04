@@ -20,6 +20,8 @@ from src.repository import OrderRow, SqlOrderRepository, make_engine
 DATOS = RAIZ / "datos"
 SALIDA = RAIZ.parent / "evidencias" / "matriz_resultados_laboratorio.csv"
 ACTUALIZADO = {"CP08": "ValueError: already confirmed (expectativa actualizada por TDD, Paso 3)"}
+# CP12 es un caso límite de redondeo: 99.99 x 15 % = 14.9985 -> descuento 15.00 -> cobro 84.99.
+TIPO_POR_CASO = {"CP12": "Límite"}
 PRUEBA = {"CP13": "test_cp13_pago_rechazado_con_mock",
           "CP14": "test_cp14_registro_visible_despues_de_commit",
           "CP15": "test_cp15_registro_ausente_despues_de_rollback"}
@@ -78,7 +80,8 @@ def main():
             p = pedidos[c["pedido_id"]]
             entrada = (f"total={p['total']}, vip={p['es_vip']}, deuda={p['deuda_cliente']}, "
                        f"estado={p['estado_inicial']}")
-            real, t, prueba = ejecutar_confirmar(p), tipo(p["escenario"]), f"test_caso_de_dominio_desde_csv[{cid}]"
+            real, prueba = ejecutar_confirmar(p), f"test_caso_de_dominio_desde_csv[{cid}]"
+            t = TIPO_POR_CASO.get(cid, tipo(p["escenario"]))
         else:
             entrada, real, t, prueba = c["accion"], ejecutar_especial(cid), "Integración", PRUEBA[cid]
         filas.append({"caso_id": cid, "pedido_id": c["pedido_id"], "entrada": entrada, "tipo": t,
