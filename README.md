@@ -12,7 +12,7 @@ Este repositorio contiene las dos partes del laboratorio guiado de la Unidad 5:
 | [`laboratorio/`](laboratorio) | Proyecto base de pedidos (Pasos 1–7) con las pruebas pedidas por la guía y los casos CP01–CP15 de los CSV | 51 + 1 xfail documentado | 100 % de `src/` |
 | [`pia/`](pia) | Código U3 de RutaNorte (sin cambios de comportamiento) + suite U5 con 23 casos PIA-01…PIA-23 (Paso 9) | 56 (30 de U3 + 26 de U5) | 99.76 % de `rutanorte` |
 | [`.github/workflows/ci.yml`](.github/workflows/ci.yml) | Pipeline con dos jobs: lint → pruebas → cobertura ≥80 % → (matriz PIA) → build | — | — |
-| [`evidencias/`](evidencias) | Matrices CSV y capturas de cada paso (E1–E9) | — | — |
+| [`evidencias/`](evidencias) | Reporte de evidencias E1–E9 (`CLN_AU5_Equipo2_REPORTE.docx` y `.pdf`, con el plan de pruebas en la sección 2.1), matrices CSV (CP01–CP15: 5 éxito, 4 error, 3 límite y 3 integración; PIA-01…PIA-23) y capturas de cada paso | — | — |
 
 ## Instalación y comandos
 
@@ -66,7 +66,9 @@ Usuario/API (no existe aún) → Handlers (Service Layer) → OrdenDeServicio / 
 4. **Ruff sin versión fija.** `ruff>=0.6` instala hoy la 0.17.3, que activa reglas nuevas (I001, UP017): el ZIP base **original** falla el lint (12 errores). Se aplicó `ruff --fix` y se fijaron las versiones en `requirements.txt` para que el CI sea reproducible.
 5. **Adaptador SQLAlchemy del PIA.** ADR-002 sigue vigente (la tecnología de BD no está definida). `SqlAlchemyUnitOfWork` es una segunda implementación de los puertos solo para pruebas: comprueba commit/rollback reales y cierra el hallazgo SOLID #5 de la U3 (sustitución de Liskov no probada): PIA-18 ejecuta el mismo flujo sobre ambas implementaciones con resultados idénticos.
 6. **Supuestos S-01 y S-04.** PIA-08 y PIA-13…15 prueban supuestos **pendientes de validar** como parámetros; los valores (p. ej. tope 4.0 m³) son de prueba, no del negocio.
-7. **Cobertura ≠ corrección.** Las ramas no ejecutadas que quedan en el PIA son la propiedad `alto_valor_autorizado` (nadie la lee fuera del agregado) y `revertir()` llamado sin instantánea; están explicadas en el reporte E9.
+7. **Cobertura ≠ corrección.** Las ramas no ejecutadas que quedan en el PIA son la propiedad `alto_valor_autorizado` (nadie la lee fuera del agregado) y `revertir()` llamado sin instantánea; están explicadas en el reporte (E9).
+
+8. **`pythonpath` en el laboratorio.** El pipeline usa `pytest` y en la laptop usamos `python -m pytest`; solo el segundo agrega la carpeta actual a la ruta de importación. GitHub Actions detectó la diferencia en la primera ejecución y se corrigió en `laboratorio/pyproject.toml`.
 
 ## Pipeline CI y evidencia E8
 
@@ -74,9 +76,12 @@ Usuario/API (no existe aún) → Handlers (Service Layer) → OrdenDeServicio / 
 
 Comprobación del bloqueo en GitHub Actions (pestaña **Actions**):
 
-1. **Verde:** primera ejecución con todo el proyecto.
-2. **Roja:** se cambió temporalmente `assert o.confirm() == 85` por `== 90` en `laboratorio/tests/test_order.py`; el job Laboratorio falló en pytest (`assert 85.0 == 90`) y el job PIA siguió en verde.
-3. **Verde recuperada:** se revirtió la aserción y ambos jobs regresaron a verde.
+0. **Primera ejecución (roja, error real):** el job Laboratorio falló con exit code 2 porque el workflow llama a `pytest` (sin `python -m`) y el laboratorio no tenía `pythonpath`, así que no encontraba el paquete `src`. Se corrigió con `pythonpath = ["."]` en `laboratorio/pyproject.toml`.
+1. **#2 · Verde:** ambos jobs pasan tras la corrección.
+2. **#3 · Roja:** se cambió temporalmente `assert o.confirm() == 85` por `== 90` en `laboratorio/tests/test_order.py`; el job Laboratorio falló en pytest (`assert 85.0 == 90`) y el job PIA siguió en verde.
+3. **#4 · Verde recuperada:** se revirtió la aserción y ambos jobs regresaron a verde.
+
+Las capturas de estas ejecuciones están en `evidencias/capturas/` (`E8_github_*`) y en el reporte (Figuras 16 a 20).
 
 Para que GitHub **bloquee** el merge hay que activar *branch protection / ruleset* en `main` exigiendo los checks `Laboratorio (pedidos)` y `PIA RutaNorte Logistics`; el YAML por sí solo no bloquea.
 
